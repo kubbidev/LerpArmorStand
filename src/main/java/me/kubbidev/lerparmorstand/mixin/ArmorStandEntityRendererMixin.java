@@ -15,20 +15,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ArmorStandEntityRendererMixin {
 
     @Inject(method = "updateRenderState", at = @At("TAIL"))
-    public void updateRenderState(ArmorStandEntity armorStandEntity, ArmorStandEntityRenderState armorStandEntityRenderState, float f, CallbackInfo ci) {
+    public void updateRenderState(ArmorStandEntity armorStandEntity,
+                                  ArmorStandEntityRenderState armorStandEntityRenderState, float f, CallbackInfo ci) {
         ArmorStandAccessor armorStandAccessor = (ArmorStandAccessor) armorStandEntity;
-        armorStandEntityRenderState.headRotation = lerpEulerAngle(f, armorStandAccessor.getLastHeadRotation(), armorStandEntity.getHeadRotation());
-        armorStandEntityRenderState.bodyRotation = lerpEulerAngle(f, armorStandAccessor.getLastBodyRotation(), armorStandEntity.getBodyRotation());
-        armorStandEntityRenderState.leftArmRotation = lerpEulerAngle(f, armorStandAccessor.getLastLeftArmRotation(), armorStandEntity.getLeftArmRotation());
-        armorStandEntityRenderState.rightArmRotation = lerpEulerAngle(f, armorStandAccessor.getLastRightArmRotation(), armorStandEntity.getRightArmRotation());
-        armorStandEntityRenderState.leftLegRotation = lerpEulerAngle(f, armorStandAccessor.getLastLeftLegRotation(), armorStandEntity.getLeftLegRotation());
-        armorStandEntityRenderState.rightLegRotation = lerpEulerAngle(f, armorStandAccessor.getLastRightLegRotation(), armorStandEntity.getRightLegRotation());
+        armorStandEntityRenderState.headRotation = lerpEulerAngle(f, armorStandAccessor.getLastHeadRotation(),
+            armorStandEntity.getHeadRotation());
+        armorStandEntityRenderState.bodyRotation = lerpEulerAngle(f, armorStandAccessor.getLastBodyRotation(),
+            armorStandEntity.getBodyRotation());
+        armorStandEntityRenderState.leftArmRotation = lerpEulerAngle(f, armorStandAccessor.getLastLeftArmRotation(),
+            armorStandEntity.getLeftArmRotation());
+        armorStandEntityRenderState.rightArmRotation = lerpEulerAngle(f, armorStandAccessor.getLastRightArmRotation(),
+            armorStandEntity.getRightArmRotation());
+        armorStandEntityRenderState.leftLegRotation = lerpEulerAngle(f, armorStandAccessor.getLastLeftLegRotation(),
+            armorStandEntity.getLeftLegRotation());
+        armorStandEntityRenderState.rightLegRotation = lerpEulerAngle(f, armorStandAccessor.getLastRightLegRotation(),
+            armorStandEntity.getRightLegRotation());
     }
 
     private static EulerAngle lerpEulerAngle(float delta, EulerAngle start, EulerAngle end) {
-        float x = MathHelper.lerp(delta, start.getPitch(), end.getPitch());
-        float y = MathHelper.lerp(delta, start.getYaw(), end.getYaw());
-        float z = MathHelper.lerp(delta, start.getRoll(), end.getRoll());
-        return new EulerAngle(x, y, z);
+        boolean bl = delta == 1f;
+        float p = bl ? end.getPitch() : MathHelper.lerp(delta, start.getPitch(), end.getPitch());
+        float y = bl ? end.getYaw() : MathHelper.lerpAngleDegrees(delta, start.getYaw(), end.getYaw());
+        float r = bl ? end.getRoll() : MathHelper.lerp(delta, start.getRoll(), end.getRoll());
+        return new EulerAngle(p, y, r);
     }
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 @Environment(EnvType.CLIENT)
 public class LerpArmorStandMod implements ClientModInitializer {
+
     public static final String MOD_ID = "lerparmorstand";
 
     /**
