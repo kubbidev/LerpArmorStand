@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "lerparmorstand",
+  "version": "${version}",
+  "name": "LerpArmorStand",
+  "icon": "assets/lerparmorstand/icon.png",
+  "description": "A Minecraft mod that tracks and linearly interpolates armor stand rotations to deliver smooth, fluid animations.",
+  "authors": [
+    "kubbidev"
+  ],
+  "license": "CC BY-NC-SA 4.0",
+  "contact": {
+    "issues": "https://github.com/kubbidev/LerpArmorStand/issues"
+  },
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.kubbidev.lerparmorstand.LerpArmorStandMod"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "lerparmorstand.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": "~1.21.4"
+  }
+}
