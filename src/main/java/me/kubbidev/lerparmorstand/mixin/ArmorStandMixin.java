@@ -57,33 +57,13 @@ public class ArmorStandMixin implements ArmorStandAccessor {
         return this.lastRightLegRotation;
     }
 
-    @Inject(method = "setHeadRotation", at = @At("HEAD"))
-    private void onSetHeadRotationCaptureOld(EulerAngle angle, CallbackInfo ci) {
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void onTick(CallbackInfo ci) {
         this.lastHeadRotation = this.headRotation;
-    }
-
-    @Inject(method = "setBodyRotation", at = @At("HEAD"))
-    private void onSetBodyRotationCaptureOld(EulerAngle angle, CallbackInfo ci) {
         this.lastBodyRotation = this.bodyRotation;
-    }
-
-    @Inject(method = "setLeftArmRotation", at = @At("HEAD"))
-    private void onSetLeftArmRotationCaptureOld(EulerAngle angle, CallbackInfo ci) {
         this.lastLeftArmRotation = this.leftArmRotation;
-    }
-
-    @Inject(method = "setRightArmRotation", at = @At("HEAD"))
-    private void onSetRightArmRotationCaptureOld(EulerAngle angle, CallbackInfo ci) {
         this.lastRightArmRotation = this.rightArmRotation;
-    }
-
-    @Inject(method = "setLeftLegRotation", at = @At("HEAD"))
-    private void onSetLeftLegRotationCaptureOld(EulerAngle angle, CallbackInfo ci) {
         this.lastLeftLegRotation = this.leftLegRotation;
-    }
-
-    @Inject(method = "setRightLegRotation", at = @At("HEAD"))
-    private void onSetRightLegRotationCaptureOld(EulerAngle angle, CallbackInfo ci) {
         this.lastRightLegRotation = this.rightLegRotation;
     }
 }
