@@ -20,41 +20,41 @@ public class ArmorStandMixin implements ArmorStandAccessor {
     private @Shadow EulerAngle leftLegRotation;
     private @Shadow EulerAngle rightLegRotation;
 
-    private @Unique EulerAngle lastHeadRotation     = ArmorStandEntity.DEFAULT_HEAD_ROTATION;
-    private @Unique EulerAngle lastBodyRotation     = ArmorStandEntity.DEFAULT_BODY_ROTATION;
-    private @Unique EulerAngle lastLeftArmRotation  = ArmorStandEntity.DEFAULT_LEFT_ARM_ROTATION;
-    private @Unique EulerAngle lastRightArmRotation = ArmorStandEntity.DEFAULT_RIGHT_ARM_ROTATION;
-    private @Unique EulerAngle lastLeftLegRotation  = ArmorStandEntity.DEFAULT_LEFT_LEG_ROTATION;
-    private @Unique EulerAngle lastRightLegRotation = ArmorStandEntity.DEFAULT_RIGHT_LEG_ROTATION;
+    private @Unique EulerAngle lastHeadRotation     = null;
+    private @Unique EulerAngle lastBodyRotation     = null;
+    private @Unique EulerAngle lastLeftArmRotation  = null;
+    private @Unique EulerAngle lastRightArmRotation = null;
+    private @Unique EulerAngle lastLeftLegRotation  = null;
+    private @Unique EulerAngle lastRightLegRotation = null;
 
     @Override
     public EulerAngle getLastHeadRotation() {
-        return this.lastHeadRotation;
+        return this.lastHeadRotation != null ? this.lastHeadRotation : this.headRotation;
     }
 
     @Override
     public EulerAngle getLastBodyRotation() {
-        return this.lastBodyRotation;
+        return this.lastBodyRotation != null ? this.lastBodyRotation : this.bodyRotation;
     }
 
     @Override
     public EulerAngle getLastLeftArmRotation() {
-        return this.lastLeftArmRotation;
+        return this.lastLeftArmRotation != null ? this.lastLeftArmRotation : this.leftArmRotation;
     }
 
     @Override
     public EulerAngle getLastRightArmRotation() {
-        return this.lastRightArmRotation;
+        return this.lastRightArmRotation != null ? this.lastRightArmRotation : this.rightArmRotation;
     }
 
     @Override
     public EulerAngle getLastLeftLegRotation() {
-        return this.lastLeftLegRotation;
+        return this.lastLeftLegRotation != null ? this.lastLeftLegRotation : this.leftLegRotation;
     }
 
     @Override
     public EulerAngle getLastRightLegRotation() {
-        return this.lastRightLegRotation;
+        return this.lastRightLegRotation != null ? this.lastRightLegRotation : this.rightLegRotation;
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
